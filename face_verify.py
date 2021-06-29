@@ -2,8 +2,6 @@ import cv2
 from PIL import Image
 import argparse
 from pathlib import Path
-from multiprocessing import Process, Pipe,Value,Array
-import torch
 from config import get_config
 from mtcnn import MTCNN
 from Learner import face_learner
@@ -50,7 +48,7 @@ if __name__ == '__main__':
         isSuccess,frame = cap.read()
         if isSuccess:            
             try:
-#                 image = Image.fromarray(frame[...,::-1]) #bgr to rgb
+        #       image = Image.fromarray(frame[...,::-1]) #bgr to rgb
                 image = Image.fromarray(frame)
                 bboxes, faces = mtcnn.align_multi(image, conf.face_limit, conf.min_face_size)
                 bboxes = bboxes[:,:-1] #shape:[10,4],only keep 10 highest possibiity faces
